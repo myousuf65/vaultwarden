@@ -1,0 +1,26 @@
+version: '3'
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    ports:
+      - 99:80
+    environment:
+      - SMTP_HOST=mail.smtp2go.com
+      - SMTP_FROM=email
+      - SMTP_PORT=587
+      - SMTP_SECURITY=starttls
+      - SMTP_USERNAME=email
+      - SMTP_PASSWORD=password
+      - SMTP_AUTH_MECHANISM='Plain'
+      - WEBSOCKET_ENABLED='true'
+      - DOMAIN=app_name_with_https
+      - ADMIN_TOKEN=password_for_admin
+      - WEB_VAULT_ENABLED=true
+      - SENDS_ALLOWED=true
+      - SIGNUPS_ALLOWED=false
+      - SIGNUPS_VERIFY=false
+      - INVITATIONS_ALLOWED=false
+    volumes:
+      - ./vw-data:/data
